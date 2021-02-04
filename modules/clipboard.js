@@ -79,8 +79,7 @@ class Clipboard extends Module {
     }
     const formats = this.quill.getFormat(this.quill.selection.savedRange.index);
     if (formats[CodeBlock.blotName]) {
-      const text = this.container.innerText;
-      console.log("text: ", text);
+      const text = this.container.innerText.replaceAll("\t", CodeBlock.TAB);
       this.container.innerHTML = '';
       return new Delta().insert(text, { [CodeBlock.blotName]: formats[CodeBlock.blotName] });
     }

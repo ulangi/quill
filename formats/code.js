@@ -107,8 +107,30 @@ class CodeBlock extends Block {
         blot.remove();
       } else {
         blot.unwrap();
+
       }
     });
+
+    this.replaceTabs(this);
+  }
+
+  replaceTabs(blot) {
+    if (typeof blot.children !== 'undefined') {
+      blot.children.forEach((child) => {
+        this.replaceTabs(child);
+      })
+    } else if (blot instanceof TextBlot) {
+      let done = false;
+      while (!done) {
+        const position = blot.value().indexOf("\t");
+        if (position !== -1) {
+          blot.deleteAt(position, 1);
+          blot.insertAt(position, CodeBlock.TAB);
+        } else {
+          done = true;
+        }
+      }
+    }
   }
 }
 CodeBlock.blotName = 'code-block';
