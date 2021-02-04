@@ -38,6 +38,7 @@ import Tooltip from './ui/tooltip';
 import BubbleTheme from './themes/bubble';
 import SnowTheme from './themes/snow';
 
+import Delta from 'quill-delta';
 
 Quill.register({
   'attributors/attribute/direction': DirectionAttribute,
@@ -102,3 +103,4 @@ Quill.register({
 
 
 export default Quill;
+export { Delta };

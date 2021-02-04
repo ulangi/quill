@@ -8,7 +8,20 @@ class SyntaxCodeBlock extends CodeBlock {
   replaceWith(block) {
     this.domNode.textContent = this.domNode.textContent;
     this.attach();
-    super.replaceWith(block);
+    const replacement = super.replaceWith(block);
+    this.removeHighlight(replacement);
+  }
+
+  removeHighlight(blot) {
+    if (typeof blot.format !== 'undefined') {
+      blot.format('token', false);
+    }
+
+    if (typeof blot.children !== 'undefined') {
+      blot.children.forEach((child) => {
+        this.removeHighlight(child)
+      })
+    }
   }
 
   highlight(highlight) {

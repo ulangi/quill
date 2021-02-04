@@ -52,6 +52,7 @@ class CodeBlock extends Block {
     let isolateLength = nextNewline - prevNewline + 1;
     let blot = this.isolate(prevNewline, isolateLength);
     let next = blot.next;
+
     blot.format(name, value);
     if (next instanceof CodeBlock) {
       next.formatAt(0, index - prevNewline + length - isolateLength, name, value);
